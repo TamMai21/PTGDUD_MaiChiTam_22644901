@@ -1,0 +1,124 @@
+// @import "tailwindcss";
+
+.content-container {
+    padding: 5% 5%;
+    display: flex;
+
+    .left-content {
+        width: 30%;
+
+        .filter {
+            .filter-box {
+                .accordion-button {
+                    background-color: white !important;
+                    color: black !important;
+                    border: none;
+                    box-shadow: none;
+                }
+
+                .accordion-button:not(.collapsed) {
+                    background-color: white !important;
+                    color: black !important;
+                    box-shadow: none;
+                }
+
+                .accordion-button:focus {
+                    box-shadow: none;
+                }
+
+                .d-flex {
+                    // padding: 2%;
+                    gap: 10%;
+
+                    //1
+                    ul {
+                        padding: 0;
+                        width: 50%;
+                        gap: 2.5%;
+
+                        li {
+                            img {
+                                height: 24px;
+                                width: 24px;
+                            }
+
+                            list-style: none;
+                            display: flex;
+                            font-size: 1rem;
+                        }
+                    }
+                }
+
+                .body2 {
+
+                    //2
+                    .d-flex2 {
+                        display: flex;
+                        justify-content: space-evenly;
+
+                        .p1 {
+                            margin-left: 16px;
+                            margin-bottom: 0;
+                            font-size: 0.75rem;
+                        }
+
+                        .p2 {
+                            margin-right: 16px;
+                            margin-bottom: 0;
+                            font-size: 0.75rem;
+                        }
+                    }
+                }
+
+                .body3 {
+
+                    ul {
+                        padding-left: 0;
+                        margin: 0;
+
+                        li {
+                            list-style: none;
+                            display: flex;
+                            align-items: center;
+
+                            img {
+                                padding: 2.5%;
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+
+    .right-content {
+        width: 70%;
+
+        .title {
+            padding-left: 2%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .content {
+            padding: 2%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.5%;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: end;
+
+            .items-center {
+                button {}
+
+                .active {
+                    background-color: lightpink;
+                }
+            }
+        }
+    }
+}

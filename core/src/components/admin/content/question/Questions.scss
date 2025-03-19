@@ -1,0 +1,104 @@
+.questions-container {
+    padding: 16px;
+
+    .title {
+        margin-bottom: 2%;
+        font-size: 2rem;
+        font-weight: 600;
+    }
+
+    .questions-content {
+        display: flex;
+        gap: 24px;
+
+        .description {
+            width: 50%;
+        }
+
+        .group-upload {
+            padding-top: 16px;
+
+            .label-upload {
+                // height: 30px;
+                // border: 1px solid red;
+                // border-radius: 4px;
+                // padding: 0px 16px;
+                margin-right: 4px;
+                font-size: 1.5rem;
+                color: blue;
+                cursor: pointer;
+
+                &:hover {
+                    color: rgb(77, 174, 206);
+                }
+            }
+        }
+
+        .btn-add {
+            padding-top: 12px;
+
+            .icon-add {
+                font-size: 2rem;
+                color: green;
+                cursor: pointer;
+
+                &:hover {
+                    opacity: 0.75;
+                }
+            }
+
+            .icon-remove {
+                margin-left: 12px;
+                font-size: 2rem;
+                color: red;
+                cursor: pointer;
+
+                &:hover {
+                    opacity: 0.75;
+                }
+            }
+        }
+
+    }
+
+    .answers-content {
+        display: flex;
+        gap: 12px;
+        padding-left: 2%;
+        padding-top: 2%;
+        align-items: center;
+
+        .iscorrect {
+            font-size: 1.25rem;
+        }
+
+        .answer-name {
+            width: 60%;
+        }
+
+        .btn-group {
+            .icon-add {
+                font-size: 2rem;
+                color: green;
+                cursor: pointer;
+
+                &:hover {
+                    opacity: 0.75;
+                }
+            }
+
+            .icon-remove {
+                margin-left: 12px;
+                font-size: 2rem;
+                color: red;
+                cursor: pointer;
+
+                &:hover {
+                    opacity: 0.75;
+                }
+            }
+        }
+
+    }
+
+}
