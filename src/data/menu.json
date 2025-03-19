@@ -1,0 +1,56 @@
+[
+    {
+        "id": 1,
+        "name": "Thuc an 1",
+        "price": 100000,
+        "image": "src/assets/img/image-food.jpg"
+    },
+    {
+        "id": 2,
+        "name": "Thuc an 2",
+        "price": 100000,
+        "image": "src/assets/img/image-food.jpg"
+    },
+    {
+        "id": 3,
+        "name": "Thuc an 3",
+        "price": 100000,
+        "image": "src/assets/img/image-food.jpg"
+    },
+    {
+        "id": 4,
+        "name": "Thuc an 4",
+        "price": 100000,
+        "image": "src/assets/img/image-food.jpg"
+    },
+    {
+        "id": 5,
+        "name": "Thuc an 5",
+        "price": 100000,
+        "image": "src/assets/img/image-food.jpg"
+    },
+    {
+        "id": 6,
+        "name": "Thuc an 6",
+        "price": 100000,
+        "image": "src/assets/img/image-food.jpg"
+    },
+    {
+        "id": 7,
+        "name": "Thuc an 7",
+        "price": 100000,
+        "image": "src/assets/img/image-food.jpg"
+    },
+    {
+        "id": 8,
+        "name": "Thuc an 8",
+        "price": 100000,
+        "image": "src/assets/img/image-food.jpg"
+    },
+    {
+        "id": 9,
+        "name": "Thuc an 9",
+        "price": 100000,
+        "image": "src/assets/img/image-food.jpg"
+    }
+]
