@@ -15,11 +15,26 @@ const Homepage = () => {
     const [dataApi, setDataApi] = useState()
     const [show, setShow] = useState(false);
 
+    const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     const { data, addToUser } = useContext(Context)
+    const [formData, setFormData] = useState({
+        name: '',
+        company: '',
+        orderValue: '',
+        orderDate: '',
+        status: 'new',
+        avatar: null
+    });
 
-
+    const handleChange = (e) => {
+        const { name, value, type, files } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: type === 'file' ? files[0] : value
+        }));
+    };
 
 
     const fetchApi = async () => {
@@ -30,6 +45,19 @@ const Homepage = () => {
         }
     }
 
+    const handleSave = () => {
+        console.log("Form Data:", formData);
+        addToUser(formData)
+        setFormData({
+            name: '',
+            company: '',
+            orderValue: '',
+            orderDate: '',
+            status: 'new',
+            avatar: null
+        })
+        handleClose();
+    };
 
 
     useEffect(() => {
@@ -43,7 +71,7 @@ const Homepage = () => {
     return (
         <div className='homepage container row'>
             <div className="col-4">
-                <Sidebar dashboard={true} />
+                <Sidebar />
             </div>
             <div className="col-8">
                 <Header />
@@ -172,12 +200,94 @@ const Homepage = () => {
                                 </tbody>
                             </table>
                         </div>
-                        <div className="px-5">
+                        <div className="px-5 footer">
                             <p className="h6">Mai Chi Tam - 22644901</p>
                         </div>
                     </div>
                 </div>
             </div>
+            <Modal show={show} onHide={handleClose} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>ADD USER</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form>
+                        <Form.Group className="mb-3">
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control
+                                type="text"
+                                name="name"
+                                value={formData.name}
+                                onChange={handleChange}
+                                placeholder="Enter name"
+                            />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                            <Form.Label>Company</Form.Label>
+                            <Form.Control
+                                type="text"
+                                name="company"
+                                value={formData.company}
+                                onChange={handleChange}
+                                placeholder="Enter company"
+                            />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                            <Form.Label>Order Value</Form.Label>
+                            <Form.Control
+                                type="number"
+                                name="orderValue"
+                                value={formData.orderValue}
+                                onChange={handleChange}
+                                placeholder="Enter order value"
+                            />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                            <Form.Label>Order Date</Form.Label>
+                            <Form.Control
+                                type="date"
+                                name="orderDate"
+                                value={formData.orderDate}
+                                onChange={handleChange}
+                            />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                            <Form.Label>Status</Form.Label>
+                            <Form.Select
+                                name="status"
+                                value={formData.status}
+                                onChange={handleChange}
+                            >
+                                <option value="new">New</option>
+                                <option value="inprogress">In Progress</option>
+                                <option value="completed">Completed</option>
+                            </Form.Select>
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                            <Form.Label>Avatar</Form.Label>
+                            <Form.Control
+                                type="file"
+                                name="avatar"
+                                onChange={handleChange}
+                                accept="image/*"
+                            />
+                        </Form.Group>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        CANCEL
+                    </Button>
+                    <Button variant="primary" onClick={handleSave}>
+                        ADD
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     )
 }
