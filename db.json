@@ -1,0 +1,31 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Charles Smith",
+      "company": "SpaceX",
+      "orderValue": "15000",
+      "orderDate": "2024-03-10",
+      "status": "new",
+      "avatar": "https://randomuser.me/api/portraits/men/1.jpg"
+    },
+    {
+      "id": "2",
+      "name": "Arthur Morgan",
+      "company": "NASA",
+      "orderValue": "28000",
+      "orderDate": "2024-02-15",
+      "status": "completed",
+      "avatar": "https://randomuser.me/api/portraits/women/2.jpg"
+    },
+    {
+      "id": "1142",
+      "name": "Komi Shouko",
+      "company": "TAKA",
+      "orderValue": "123",
+      "orderDate": "2025-04-19",
+      "status": "completed",
+      "avatar": "blob:http://localhost:5173/9c0c2337-8022-4a4a-afa9-df88abd19106"
+    }
+  ]
+}

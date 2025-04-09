@@ -1,23 +1,39 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react'
+
 const Context = createContext(null)
+
 const ContextProvider = ({ children }) => {
-    let [data, setData] = useState([])
+    const [data, setData] = useState([])
+
     const addToUser = (dataAdd) => {
-        setData([...data, dataAdd]);
-    };
-    const remove = (data) => {
-        let dataAfterRemove = dataCart.filter(item => +item.id !== +data.id)
-        setDataCart(dataAfterRemove)
+        setData(prev => [...prev, dataAdd])
     }
+
+    const remove = (userToRemove) => {
+        const filtered = data.filter(item => +item.id !== +userToRemove.id)
+        setData(filtered)
+    }
+
     useEffect(() => {
-        // fetchPokemon();
-        // console.log('data Context: ', dataJson);
-        // console.log('data cart: ', data);
-    }, [data])
-    const value = useMemo(() => ({ data, addToUser, remove }), [data]);
+        const fetchData = async () => {
+            try {
+                const response = await fetch('http://localhost:3001/users')
+                const json = await response.json()
+                setData(json)
+            } catch (error) {
+                console.error('Lỗi khi fetch data từ db.json:', error)
+            }
+        }
+        fetchData()
+    }, [])
+
+    const value = useMemo(() => ({ data, addToUser, remove }), [data])
+
     return (
         <Context.Provider value={value}>
             {children}
-        </Context.Provider>)
+        </Context.Provider>
+    )
 }
+
 export { ContextProvider, Context }
