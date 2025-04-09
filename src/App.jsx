@@ -1,13 +1,14 @@
 import { useState } from 'react'
 import viteLogo from '/vite.svg'
 import './App.css'
-import AppRoute from './routes/AppRoute'
+import Homepage from './pages/Homepage'
+
 
 function App() {
 
   return (
     <>
-      <AppRoute />
+      <Homepage />
     </>
   )
 }

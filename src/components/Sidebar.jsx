@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import './Sidebar.css'
+import logo from '../assest/img/logo.png'
+import squareFour from '../assest/img/Squares-four1.png'
+import folder from '../assest/img/Folder.png'
+import group from '../assest/img/Groups.png'
+import pieChart from '../assest/img/Pie-chart.png'
+import chat from '../assest/img/Chat.png'
+import code from '../assest/img/Code.png'
+import version from '../assest/img/Group.png'
 
 const Sidebar = () => {
 
@@ -19,11 +27,42 @@ const Sidebar = () => {
 
     return (
         <div className='sidebar'>
-            {dataApi ?
-                <p className='api'>{JSON.stringify(dataApi)}</p>
-                :
-                <>NO API</>
-            }
+            <div className="logo">
+                <img src={logo} alt="" className='img-logo' />
+            </div>
+            <div className="nav">
+                <div className="item active">
+                    <img src={squareFour} alt="" />
+                    <p>Dashboards</p>
+                </div>
+                <div className="item">
+                    <img src={folder} alt="" />
+                    <p>Projects</p>
+                </div>
+                <div className="item">
+                    <img src={group} alt="" />
+                    <p>Teams</p>
+                </div>
+                <div className="item">
+                    <img src={pieChart} alt="" />
+                    <p>Analystics</p>
+                </div>
+                <div className="item">
+                    <img src={chat} alt="" />
+                    <p>Messages</p>
+                </div>
+                <div className="item">
+                    <img src={code} alt="" />
+                    <p>Intergrations</p>
+                </div>
+                <div className="ver">
+                    <img src={version} alt="" />
+                    <div className="gr">
+                        <p className="h6 text-dark">V2.0 is available</p>
+                        <button className="btn btn-light">Try now</button>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }

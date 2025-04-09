@@ -7,26 +7,19 @@ import fileText from '../assest/img/File-text-1.png'
 import cart from '../assest/img/Button-1509.png'
 import upload from '../assest/img/Move-up.png'
 import download from '../assest/img/Download.png'
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Modal } from 'react-bootstrap';
 import { EditOutlined } from '@ant-design/icons'; // Import biểu tượng EditOutlined từ Ant Design Icons
-
+import { Context } from '../context/Context'
 
 const Homepage = () => {
     const [dataApi, setDataApi] = useState()
     const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    const { data, addToUser } = useContext(Context)
 
 
-    const handleChange = (e) => {
-        const { name, value, type, files } = e.target;
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: type === 'file' ? files[0] : value
-        }));
-    };
 
 
     const fetchApi = async () => {
@@ -36,7 +29,6 @@ const Homepage = () => {
             setDataApi(responseJson)
         }
     }
-
 
 
 
@@ -154,26 +146,29 @@ const Homepage = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-
-                                    <tr>
-                                        <th scope="row">
-                                            <input type="checkbox" name="" id="" />
-                                        </th>
-                                        <td className='d-flex'>
-                                            <img alt="" style={{ width: "24px", height: "24px" }} />
-                                            <p>ITEM 1</p>
-                                        </td>
-                                        <td>COMPANY 1</td>
-                                        <td>$12345</td>
-                                        <td>2025-07-05</td>
-                                        <td>NEW</td>
-                                        <td>
-                                            <Button variant="primary">
-                                                <EditOutlined /> Edit
-                                            </Button>
-                                        </td>
-                                    </tr>
-
+                                    {data && data.length !== 0 && data.map((item, index) => {
+                                        const avatarUrl = item.avatar ? URL.createObjectURL(item.avatar) : '';
+                                        return (
+                                            <tr>
+                                                <th scope="row" key={index}>
+                                                    <input type="checkbox" name="" id="" />
+                                                </th>
+                                                <td className='d-flex'>
+                                                    <img src={avatarUrl} alt="" style={{ width: "24px", height: "24px" }} />
+                                                    <p>{item.name}</p>
+                                                </td>
+                                                <td>{item.company}</td>
+                                                <td>${item.orderValue}</td>
+                                                <td>{item.orderDate}</td>
+                                                <td>{item.status}</td>
+                                                <td>
+                                                    <Button variant="primary">
+                                                        <EditOutlined /> Edit
+                                                    </Button>
+                                                </td>
+                                            </tr>
+                                        )
+                                    })}
                                 </tbody>
                             </table>
                         </div>
@@ -183,7 +178,6 @@ const Homepage = () => {
                     </div>
                 </div>
             </div>
-
         </div>
     )
 }
