@@ -39,3 +39,46 @@
 .footer {
     padding: 2%;
 }
+
+
+.homepage {
+    width: 100%;
+    /* border: 1px solid black; */
+    height: 1000px;
+    padding: 0 !important;
+}
+
+.col-4,
+.col-8 {
+    padding: 0 !important;
+}
+
+.content {
+    /* border: 1px solid green; */
+    height: 100%;
+}
+
+.img-content {
+    width: 24px;
+    height: 24px;
+}
+
+.overview2 {
+    padding: 2%;
+}
+
+.overview-item {
+    margin: 1%;
+}
+
+.flex-end {
+    justify-content: end;
+}
+
+.table {
+    min-height: 60vh;
+}
+
+.footer {
+    padding: 2%;
+}
