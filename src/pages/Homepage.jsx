@@ -43,7 +43,7 @@ const Homepage = () => {
     return (
         <div className='homepage container row'>
             <div className="col-4">
-                <Sidebar />
+                <Sidebar dashboard={true} />
             </div>
             <div className="col-8">
                 <Header />

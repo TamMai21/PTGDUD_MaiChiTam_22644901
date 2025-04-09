@@ -8,8 +8,9 @@ import pieChart from '../assest/img/Pie-chart.png'
 import chat from '../assest/img/Chat.png'
 import code from '../assest/img/Code.png'
 import version from '../assest/img/Group.png'
+import { useNavigate } from 'react-router-dom'
 
-const Sidebar = () => {
+const Sidebar = (props) => {
 
     const [dataApi, setDataApi] = useState()
 
@@ -21,6 +22,8 @@ const Sidebar = () => {
         }
     }
 
+    const navigate = useNavigate()
+
     useEffect(() => {
         fetchApi()
     }, [])
@@ -31,13 +34,13 @@ const Sidebar = () => {
                 <img src={logo} alt="" className='img-logo' />
             </div>
             <div className="nav">
-                <div className="item active">
+                <div className="item" style={{ backgroundColor: props.dashboard ? "pink" : "none" }} onClick={() => navigate("/")}>
                     <img src={squareFour} alt="" />
                     <p>Dashboards</p>
                 </div>
-                <div className="item">
+                <div className="item" style={{ backgroundColor: props.about ? "pink" : "none" }} onClick={() => navigate("/about")}>
                     <img src={folder} alt="" />
-                    <p>Projects</p>
+                    <p>About me</p>
                 </div>
                 <div className="item">
                     <img src={group} alt="" />
