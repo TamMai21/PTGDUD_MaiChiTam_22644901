@@ -1,0 +1,79 @@
+.header {
+    width: 100%;
+    margin: auto;
+    margin-top: 0;
+    height: 10vh;
+    display: flex;
+    margin-bottom: 5%;
+
+    .left {
+        width: 40vw;
+
+        .logo {
+            display: flex;
+            justify-content: space-between;
+
+            .img {
+                width: 30%;
+                height: 75%;
+                margin-top: 2.5%;
+            }
+
+            .input {
+                width: 60%;
+                padding: 5%;
+            }
+        }
+    }
+
+    .right {
+        width: 60vw;
+        display: flex;
+
+        .right-ul {
+            width: 75%;
+            display: flex;
+            padding: 2.5%;
+
+            .li-item {
+                text-decoration: none;
+                list-style: none;
+                padding: 2.5%;
+
+            }
+        }
+
+        .avt {
+            display: flex;
+            width: 25%;
+            // margin-top: 5%;
+            gap: 16px;
+            margin-top: 2.5%;
+
+            .receive-box {
+                // height: fit-content;
+                padding: 5%;
+                margin-top: 5%;
+                display: flex;
+                border-radius: 8px;
+                background-color: lightpink;
+
+                .check {
+                    max-width: 16px;
+                    max-height: 16px;
+                }
+
+                .text {
+                    font-size: 0.75rem;
+                }
+            }
+
+            .avatar {
+                // padding: 5%;
+                margin-top: 5%;
+                max-width: 64px;
+                max-height: 64px;
+            }
+        }
+    }
+}

@@ -1,0 +1,20 @@
+.header {
+    /* border: 1px solid black; */
+    width: 100%;
+    margin: 0 !important;
+    padding: 1.5%;
+}
+
+.api {
+    font-size: 0.5rem;
+}
+
+.text-pink {
+    color: rgb(224, 76, 100) !important;
+    font-weight: 450;
+    font-size: 3rem;
+}
+
+.col-4 {
+    text-align: left;
+}
