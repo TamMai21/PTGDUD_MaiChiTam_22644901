@@ -12,44 +12,52 @@ const ProductList = () => {
   const [categoryFilter, setCategoryFilter] = useState(''); // Lọc theo danh mục
   const [categories, setCategories] = useState([]); // Lưu danh sách các danh mục duy nhất
 
+  // Lấy dữ liệu từ localStorage khi trang được tải
   useEffect(() => {
-    axios.get('http://localhost:3001/products')
-      .then((res) => {
-        const data = res.data;
-        setProducts(data);
-        
-        // Lấy danh sách danh mục duy nhất
-        const uniqueCategories = [...new Set(data.map(p => p.category))];
-        setCategories(uniqueCategories);
-      })
-      .catch((err) => console.error(err));
+    const storedProducts = JSON.parse(localStorage.getItem('products'));
+    if (storedProducts) {
+      setProducts(storedProducts);
+    }
+
+    // Lấy danh sách danh mục duy nhất
+    const uniqueCategories = [...new Set(storedProducts?.map(p => p.category) || [])];
+    setCategories(uniqueCategories);
   }, []);
+
+  // Cập nhật localStorage khi danh sách sản phẩm thay đổi
+  useEffect(() => {
+    if (products.length > 0) {
+      localStorage.setItem('products', JSON.stringify(products));
+    }
+  }, [products]);
 
   const handleAddProduct = () => {
     const newProduct = {
       name,
       price: parseFloat(price),
       category,
-      stock: parseInt(stock)
+      stock: parseInt(stock),
     };
 
-    axios.post('http://localhost:3001/products', newProduct)
-      .then((res) => {
-        setProducts([...products, res.data]);
-        setName('');
-        setPrice('');
-        setCategory('');
-        setStock('');
-      })
-      .catch((err) => console.error(err));
+    // Thêm sản phẩm mới vào danh sách
+    const updatedProducts = [...products, newProduct];
+    setProducts(updatedProducts);
+    
+    // Cập nhật localStorage
+    localStorage.setItem('products', JSON.stringify(updatedProducts));
+
+    setName('');
+    setPrice('');
+    setCategory('');
+    setStock('');
   };
 
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:3001/products/${id}`)
-      .then(() => {
-        setProducts(products.filter(p => p.id !== id));
-      })
-      .catch((err) => console.error(err));
+    const updatedProducts = products.filter(p => p.id !== id);
+    setProducts(updatedProducts);
+    
+    // Cập nhật localStorage
+    localStorage.setItem('products', JSON.stringify(updatedProducts));
   };
 
   // Lọc sản phẩm theo tên và danh mục
@@ -143,14 +151,14 @@ const ProductList = () => {
           </tr>
         </thead>
         <tbody>
-          {filteredProducts.map((p) => (
-            <tr key={p.id}>
+          {filteredProducts.map((p, index) => (
+            <tr key={index}>
               <td>{p.name}</td>
               <td>{p.price}</td>
               <td>{p.category}</td>
               <td>{p.stock}</td>
               <td>
-                <Button variant="danger" size="sm" onClick={() => handleDelete(p.id)}>
+                <Button variant="danger" size="sm" onClick={() => handleDelete(index)}>
                   Xoá
                 </Button>
               </td>
