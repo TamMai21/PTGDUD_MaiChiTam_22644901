@@ -80,14 +80,15 @@ const ProductList = () => {
   const totalStock = filteredProducts.reduce((total, product) => total + product.stock, 0);
 
   return (
-    <Container className="mt-4">
-      <h2 className="mb-4">Danh sách sản phẩm</h2>
+    <Container className="mt-4" style={{padding: "2.5%", backgroundColor: "#dddbf9", borderRadius: "24px", border: "1px solid blue"}}>
+      <h2 className="mb-4 text-center text-primary">Danh sách sản phẩm</h2>
 
       {/* Ô tìm kiếm tên sản phẩm */}
       <Row className="mb-3">
         <Col md={4}>
           <InputGroup>
             <Form.Control
+              className="input-search"
               placeholder="Tìm sản phẩm theo tên"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)} // Cập nhật từ khoá tìm kiếm theo tên
@@ -100,6 +101,7 @@ const ProductList = () => {
       <Row className="mb-3">
         <Col md={4}>
           <Form.Select
+            className="select-category"
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)} // Cập nhật danh mục lọc
           >
@@ -115,6 +117,7 @@ const ProductList = () => {
       <Row className="mb-3">
         <Col>
           <Form.Control
+            className="input-form"
             placeholder="Tên sản phẩm"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -122,6 +125,7 @@ const ProductList = () => {
         </Col>
         <Col>
           <Form.Control
+            className="input-form"
             type="number"
             placeholder="Giá"
             value={price}
@@ -130,6 +134,7 @@ const ProductList = () => {
         </Col>
         <Col>
           <Form.Control
+            className="input-form"
             placeholder="Danh mục"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
@@ -137,6 +142,7 @@ const ProductList = () => {
         </Col>
         <Col>
           <Form.Control
+            className="input-form"
             type="number"
             placeholder="Tồn kho"
             value={stock}
@@ -144,7 +150,7 @@ const ProductList = () => {
           />
         </Col>
         <Col>
-          <Button onClick={handleAddProduct}>Thêm sản phẩm</Button>
+          <Button className="btn-add-product" onClick={handleAddProduct}>Thêm sản phẩm</Button>
         </Col>
       </Row>
 
@@ -181,6 +187,7 @@ const ProductList = () => {
         <Col>
           <h5>Tổng số sản phẩm: {totalProducts}</h5>
           <h5>Tổng tồn kho: {totalStock}</h5>
+          <h5>Mai Chí Tâm - 22644901</h5>
         </Col>
       </Row>
     </Container>

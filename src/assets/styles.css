@@ -1,0 +1,59 @@
+/* Thiết lập màu sắc cho các phần tử */
+.card-header {
+    background-color: #f7f7f7;
+    color: #333;
+  }
+  
+  .card-footer {
+    background-color: #f1f1f1;
+    color: #666;
+  }
+  
+  .table th, .table td {
+    text-align: center;
+  }
+  
+  .table th {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .table td {
+    background-color: #f8f9fa;
+  }
+  
+  /* Đặt màu nền cho nút thêm sản phẩm */
+  .btn-add-product {
+    background-color: #28a745;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .btn-add-product:hover {
+    background-color: #218838;
+    color: white;
+  }
+  
+  /* Định dạng ô tìm kiếm */
+  .input-search {
+    border-radius: 25px;
+    padding: 10px;
+  }
+  
+  .select-category {
+    border-radius: 25px;
+    padding: 10px;
+  }
+  
+  /* Định dạng các ô nhập liệu */
+  .input-form {
+    border-radius: 10px;
+    margin: 5px 0;
+    padding: 10px;
+  }
+  
+  /* Định dạng cho bảng */
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f2f2f2;
+  }
+  
