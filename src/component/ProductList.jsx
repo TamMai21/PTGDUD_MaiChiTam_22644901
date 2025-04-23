@@ -9,11 +9,19 @@ const ProductList = () => {
   const [category, setCategory] = useState('');
   const [stock, setStock] = useState('');
   const [searchTerm, setSearchTerm] = useState(''); // Tìm kiếm theo tên
-  const [categoryFilter, setCategoryFilter] = useState(''); // Tìm kiếm theo danh mục
+  const [categoryFilter, setCategoryFilter] = useState(''); // Lọc theo danh mục
+  const [categories, setCategories] = useState([]); // Lưu danh sách các danh mục duy nhất
 
   useEffect(() => {
     axios.get('http://localhost:3001/products')
-      .then((res) => setProducts(res.data))
+      .then((res) => {
+        const data = res.data;
+        setProducts(data);
+        
+        // Lấy danh sách danh mục duy nhất
+        const uniqueCategories = [...new Set(data.map(p => p.category))];
+        setCategories(uniqueCategories);
+      })
       .catch((err) => console.error(err));
   }, []);
 
@@ -45,10 +53,14 @@ const ProductList = () => {
   };
 
   // Lọc sản phẩm theo tên và danh mục
-  const filteredProducts = products.filter(p => 
+  const filteredProducts = products.filter(p =>
     p.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-    p.category.toLowerCase().includes(categoryFilter.toLowerCase())
+    (categoryFilter ? p.category === categoryFilter : true)
   );
+
+  // Tính tổng số sản phẩm và tổng tồn kho
+  const totalProducts = filteredProducts.length;
+  const totalStock = filteredProducts.reduce((total, product) => total + product.stock, 0);
 
   return (
     <Container className="mt-4">
@@ -67,16 +79,18 @@ const ProductList = () => {
         </Col>
       </Row>
 
-      {/* Ô lọc theo danh mục */}
+      {/* Dropdown lọc theo danh mục */}
       <Row className="mb-3">
         <Col md={4}>
-          <InputGroup>
-            <Form.Control
-              placeholder="Lọc theo danh mục"
-              value={categoryFilter}
-              onChange={(e) => setCategoryFilter(e.target.value)} // Cập nhật từ khoá tìm kiếm theo danh mục
-            />
-          </InputGroup>
+          <Form.Select
+            value={categoryFilter}
+            onChange={(e) => setCategoryFilter(e.target.value)} // Cập nhật danh mục lọc
+          >
+            <option value="">Lọc theo danh mục</option>
+            {categories.map((category, index) => (
+              <option key={index} value={category}>{category}</option>
+            ))}
+          </Form.Select>
         </Col>
       </Row>
 
@@ -149,6 +163,14 @@ const ProductList = () => {
           )}
         </tbody>
       </Table>
+
+      {/* Hiển thị tổng số sản phẩm và tổng tồn kho */}
+      <Row className="mt-4">
+        <Col>
+          <h5>Tổng số sản phẩm: {totalProducts}</h5>
+          <h5>Tổng tồn kho: {totalStock}</h5>
+        </Col>
+      </Row>
     </Container>
   );
 };

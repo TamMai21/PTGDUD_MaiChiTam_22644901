@@ -13,6 +13,13 @@
       "price": 12345,
       "category": "Thức uống",
       "stock": 12344
+    },
+    {
+      "id": "84b6",
+      "name": "Cam",
+      "price": 12345,
+      "category": "Trái cây",
+      "stock": 100
     }
   ]
 }
