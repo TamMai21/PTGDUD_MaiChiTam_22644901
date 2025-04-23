@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { Table, Button, Container, Form, Row, Col, InputGroup } from 'react-bootstrap';
+import ProductItem from './ProductItem';  // Import ProductItem component
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -19,7 +19,7 @@ const ProductList = () => {
       setProducts(storedProducts);
     }
 
-    // Lấy danh sách danh mục duy nhất
+    // Lấy danh sách danh mục duy nhất từ sản phẩm
     const uniqueCategories = [...new Set(storedProducts?.map(p => p.category) || [])];
     setCategories(uniqueCategories);
   }, []);
@@ -42,22 +42,31 @@ const ProductList = () => {
     // Thêm sản phẩm mới vào danh sách
     const updatedProducts = [...products, newProduct];
     setProducts(updatedProducts);
-    
+
+    // Cập nhật danh sách danh mục duy nhất
+    const updatedCategories = [...new Set(updatedProducts.map(p => p.category))];
+    setCategories(updatedCategories);
+
     // Cập nhật localStorage
     localStorage.setItem('products', JSON.stringify(updatedProducts));
 
+    // Reset các trường input
     setName('');
     setPrice('');
     setCategory('');
     setStock('');
   };
 
-  const handleDelete = (id) => {
-    const updatedProducts = products.filter(p => p.id !== id);
+  const handleDelete = (index) => {
+    const updatedProducts = products.filter((_, i) => i !== index);
     setProducts(updatedProducts);
     
     // Cập nhật localStorage
     localStorage.setItem('products', JSON.stringify(updatedProducts));
+
+    // Cập nhật lại danh sách danh mục
+    const updatedCategories = [...new Set(updatedProducts.map(p => p.category))];
+    setCategories(updatedCategories);
   };
 
   // Lọc sản phẩm theo tên và danh mục
@@ -151,18 +160,13 @@ const ProductList = () => {
           </tr>
         </thead>
         <tbody>
-          {filteredProducts.map((p, index) => (
-            <tr key={index}>
-              <td>{p.name}</td>
-              <td>{p.price}</td>
-              <td>{p.category}</td>
-              <td>{p.stock}</td>
-              <td>
-                <Button variant="danger" size="sm" onClick={() => handleDelete(index)}>
-                  Xoá
-                </Button>
-              </td>
-            </tr>
+          {filteredProducts.map((product, index) => (
+            <ProductItem 
+              key={index}
+              product={product}
+              index={index}
+              handleDelete={handleDelete}
+            />
           ))}
           {filteredProducts.length === 0 && (
             <tr>
