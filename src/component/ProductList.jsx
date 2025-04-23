@@ -34,6 +34,14 @@ const ProductList = () => {
       .catch((err) => console.error(err));
   };
 
+  const handleDelete = (id) => {
+    axios.delete(`http://localhost:3001/products/${id}`)
+      .then(() => {
+        setProducts(products.filter(p => p.id !== id));
+      })
+      .catch((err) => console.error(err));
+  };
+
   return (
     <Container className="mt-4">
       <h2 className="mb-4">Danh sách sản phẩm</h2>
@@ -81,6 +89,7 @@ const ProductList = () => {
             <th>Giá</th>
             <th>Danh mục</th>
             <th>Tồn kho</th>
+            <th>Hành động</th>
           </tr>
         </thead>
         <tbody>
@@ -90,11 +99,16 @@ const ProductList = () => {
               <td>{p.price}</td>
               <td>{p.category}</td>
               <td>{p.stock}</td>
+              <td>
+                <Button variant="danger" size="sm" onClick={() => handleDelete(p.id)}>
+                  Xoá
+                </Button>
+              </td>
             </tr>
           ))}
           {products.length === 0 && (
             <tr>
-              <td colSpan="4" className="text-center">Không có sản phẩm</td>
+              <td colSpan="5" className="text-center">Không có sản phẩm</td>
             </tr>
           )}
         </tbody>
