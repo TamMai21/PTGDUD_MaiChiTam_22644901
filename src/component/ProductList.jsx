@@ -8,7 +8,8 @@ const ProductList = () => {
   const [price, setPrice] = useState('');
   const [category, setCategory] = useState('');
   const [stock, setStock] = useState('');
-  const [searchTerm, setSearchTerm] = useState(''); // Thêm state cho từ khoá tìm kiếm
+  const [searchTerm, setSearchTerm] = useState(''); // Tìm kiếm theo tên
+  const [categoryFilter, setCategoryFilter] = useState(''); // Tìm kiếm theo danh mục
 
   useEffect(() => {
     axios.get('http://localhost:3001/products')
@@ -43,23 +44,37 @@ const ProductList = () => {
       .catch((err) => console.error(err));
   };
 
-  // Lọc sản phẩm theo từ khoá tìm kiếm
-  const filteredProducts = products.filter(p =>
-    p.name.toLowerCase().includes(searchTerm.toLowerCase())
+  // Lọc sản phẩm theo tên và danh mục
+  const filteredProducts = products.filter(p => 
+    p.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+    p.category.toLowerCase().includes(categoryFilter.toLowerCase())
   );
 
   return (
     <Container className="mt-4">
       <h2 className="mb-4">Danh sách sản phẩm</h2>
 
-      {/* Ô tìm kiếm */}
+      {/* Ô tìm kiếm tên sản phẩm */}
       <Row className="mb-3">
         <Col md={4}>
           <InputGroup>
             <Form.Control
               placeholder="Tìm sản phẩm theo tên"
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)} // Cập nhật từ khoá tìm kiếm
+              onChange={(e) => setSearchTerm(e.target.value)} // Cập nhật từ khoá tìm kiếm theo tên
+            />
+          </InputGroup>
+        </Col>
+      </Row>
+
+      {/* Ô lọc theo danh mục */}
+      <Row className="mb-3">
+        <Col md={4}>
+          <InputGroup>
+            <Form.Control
+              placeholder="Lọc theo danh mục"
+              value={categoryFilter}
+              onChange={(e) => setCategoryFilter(e.target.value)} // Cập nhật từ khoá tìm kiếm theo danh mục
             />
           </InputGroup>
         </Col>
